@@ -65,9 +65,9 @@ var_dump($hotels);
 
         <?php
 
-        $key = array_keys($hotels);
+        $keys = array_keys($hotels);
 
-        var_dump($key);
+        var_dump($keys);
 
         foreach ($hotels as $key => $hotel) {
 
@@ -89,30 +89,56 @@ var_dump($hotels);
 
 
     <table class="table">
-        <?php foreach ($hotels as $key => $hotel):
-            foreach ($hotel as $key_description => $info): ?>
-                <thead>
-                    <tr>
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <?php
 
-                        <th scope="col">
-                            <?php echo $key_description; ?>
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <th scope="row">
-                            <?php echo $key; ?>
-                        </th>
-                        <td>
-                            <?php echo $info; ?>
-                        </td>
-                    </tr>
+                //Con $hotels[0] prendo le chiavi dell'array in posizione zero una sola 
+                //volta = name, description, parking etc..
+                
+                foreach ($hotels[0] as $key => $hotel): ?>
 
-                </tbody>
-            <?php endforeach; endforeach; ?>
+                    <th scope="col">
+                        <?php echo $key; ?>
+                    </th>
+
+                <?php endforeach; ?>
+            </tr>
+        </thead>
+        <tbody>
+
+            <?php
+
+            //Da info recupero i dati all'interno di ogni elemento
+            
+            foreach ($hotels as $index => $info):
+                ?>
+                <tr>
+                    <th scope="row">
+                        <?php echo $index; ?>
+                    </th>
+                    <td>
+                        <?php echo $info["name"]; ?>
+                    </td>
+                    <td>
+                        <?php echo $info["description"]; ?>
+                    </td>
+                    <td>
+                        <?php echo $info["parking"]; ?>
+                    </td>
+                    <td>
+                        <?php echo $info["vote"]; ?>
+                    </td>
+                    <td>
+                        <?php echo $info["distance_to_center"]; ?>
+                    </td>
+                </tr>
+            <?php endforeach; ?>
+        </tbody>
+
+
     </table>
-
 
 </body>
 
